@@ -3,6 +3,8 @@ using System.Collections;
 
 public class playerControl : MonoBehaviour
 {
+    public GameObject fireball;
+    public GameObject explode;
     public float speed = 0.5f;
     private float x;
     private float y;
@@ -21,7 +23,7 @@ public class playerControl : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, 0);
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            StartCoroutine(fire());
+            StartCoroutine(Fire());
         }
     }
 
@@ -37,10 +39,10 @@ public class playerControl : MonoBehaviour
 
     }
 
-    IEnumerator fire()
+    IEnumerator Fire()
     {
         arrows.SetActive(true);
-        while (Input.GetAxis("Horizontal") == 0 || Input.GetAxis("Vertical") == 0)
+        while ((Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0))
         {
             if (Input.GetKeyUp(KeyCode.Space))
             {
@@ -51,6 +53,26 @@ public class playerControl : MonoBehaviour
             {
                 yield return null;
             }
+        }
+
+        GameObject fb = Instantiate(fireball, new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.Euler(0, 0, 0));
+        fireControl fc = fb.GetComponent<fireControl>();
+        fc.explode = explode;
+        if (Input.GetAxis("Horizontal") > 0)
+        {
+            fc.dir = 'r';
+        }
+        else if (Input.GetAxis("Horizontal") < 0)
+        {
+            fc.dir = 'l';
+        }
+        else if (Input.GetAxis("Vertical") > 0)
+        {
+            fc.dir = 'u';
+        }
+        else if (Input.GetAxis("Vertical") < 0)
+        {
+            fc.dir = 'd';
         }
         arrows.SetActive(false);
         yield break;
