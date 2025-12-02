@@ -3937,7 +3937,7 @@ GameObject:
   - component: {fileID: 4340889482198847184}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7022,7 +7022,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::playerControl
   fireball: {fileID: 8397230750190518221, guid: fb65e52f061da6ee49907a5ed91dbfb5, type: 3}
   explode: {fileID: 5153362295465922963, guid: ca92c1ed51678cd668357d3efbc7ab87, type: 3}
-  speed: 7.5
+  speed: 5
   rb: {fileID: 0}
   arrows: {fileID: 7800939735804860214}
 --- !u!61 &101977455361321823
