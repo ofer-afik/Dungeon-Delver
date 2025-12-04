@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Map
   - Coin
+  - Enemy
+  - Fireball
   layers:
   - Default
   - TransparentFX

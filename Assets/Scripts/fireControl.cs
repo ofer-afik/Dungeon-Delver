@@ -48,5 +48,11 @@ public class fireControl : MonoBehaviour
             Instantiate(explode, transform.position, Quaternion.Euler(0, 0, 0));
             Destroy(this.gameObject);
         }
+        if (other.CompareTag("Enemy"))
+        {
+            GameManager.Instance.EnemiesKilled += 1;
+            Instantiate(explode, transform.position, Quaternion.Euler(0, 0, 0));
+            Destroy(this.gameObject);
+        }
     }
 }
