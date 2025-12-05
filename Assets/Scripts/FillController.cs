@@ -13,5 +13,5 @@ public class FillController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        fillImage.fillAmount = GameManager.Instance.EnemiesKilled / 20f;  }
+        fillImage.fillAmount = GameManager.Instance.EnemiesKilled / 15f;  }
 }

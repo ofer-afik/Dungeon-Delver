@@ -17,6 +17,14 @@ public class playerControl : MonoBehaviour
         arrows.SetActive(false);
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Enemy"))
+        {
+            GameManager.Instance.PlayerHP -= 5;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -24,6 +32,11 @@ public class playerControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine(Fire());
+        }
+        if (GameManager.Instance.PlayerHP <= 0)
+        {
+            Destroy(this.gameObject);
+            GameManager.Instance.dead = true;
         }
     }
 

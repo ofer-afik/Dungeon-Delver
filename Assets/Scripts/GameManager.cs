@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -6,6 +7,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public int coins;
     public int EnemiesKilled;
+    public int PlayerHP = 100;
+    public bool dead = false;
     void Awake()
     {
         if (Instance == null)
@@ -26,6 +29,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (dead == true)
+        {
+            if (SceneManager.GetActiveScene().name != "GameOver")
+            {
+                SceneManager.LoadScene("GameOver");
+            }
+        }
     }
 }
