@@ -12,6 +12,7 @@ public class ReturnBut : MonoBehaviour
     public void OnPress()
     {
         SceneManager.LoadScene("StartScene");
+        GameManager.Instance.dead = false;
     }
     // Update is called once per frame
     void Update()
