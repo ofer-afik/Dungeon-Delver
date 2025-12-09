@@ -1335,6 +1335,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   coins: 0
   EnemiesKilled: 0
+  PlayerHP: 100
+  dead: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
