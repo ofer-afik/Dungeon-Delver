@@ -17,11 +17,11 @@ public class playerControl : MonoBehaviour
         arrows.SetActive(false);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Enemy"))
         {
-            GameManager.Instance.PlayerHP -= 5;
+            GameManager.Instance.PlayerHP -= 0.25f;
         }
     }
 

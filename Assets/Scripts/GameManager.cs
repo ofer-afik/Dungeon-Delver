@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public int coins;
     public int EnemiesKilled;
-    public int PlayerHP = 100;
+    public float PlayerHP = 100f;
     public bool dead = false;
     void Awake()
     {
