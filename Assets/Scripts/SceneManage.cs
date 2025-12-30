@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class SceneManage : MonoBehaviour
 {
-        public Tilemap spawnTilemap;       // Assign in Inspector
+    public Tilemap spawnTilemap;       // Assign in Inspector
     public GameObject enemyPrefab;     // Assign in Inspector
     public float spawnInterval = 10f;
 

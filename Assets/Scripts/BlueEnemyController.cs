@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class BlueEnemyController : MonoBehaviour
 {
@@ -9,7 +10,6 @@ public class BlueEnemyController : MonoBehaviour
     private float playerY;
     public Animator anim;
     private Vector2 direction;
-
     void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -20,34 +20,7 @@ public class BlueEnemyController : MonoBehaviour
 
     void FixedUpdate()
     {
-        playerX = player.transform.position.x;
-        playerY = player.transform.position.y;
-        if (Mathf.Abs(playerX - transform.position.x) > Mathf.Abs(playerY - transform.position.y))
-        {
-            if (playerX > transform.position.x)
-            {
-                // Move right
-                direction = new Vector2(1, 0);
-            }
-            else
-            {
-                // Move left
-                direction = new Vector2(-1, 0);
-            }
-        }
-        else
-        {
-            if (playerY > transform.position.y)
-            {
-                // Move up
-                direction = new Vector2(0, 1);
-            }
-            else
-            {
-                // Move down
-                direction = new Vector2(0, -1);
-            }
-        }
+        direction = (player.transform.position - transform.position).normalized;
         rb.linearVelocity = direction * speed;
     }
 
@@ -55,8 +28,8 @@ public class BlueEnemyController : MonoBehaviour
     {
         if (other.CompareTag("Fireball"))
         {
-            anim.SetTrigger("toDie");
-            Destroy(this.gameObject);
+            Instantiate(Resources.Load("Blue Death (No flash)"), transform.position, Quaternion.identity);
+            Destroy(gameObject);
         }
     }
 }
