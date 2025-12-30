@@ -560,7 +560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   spawnTilemap: {fileID: 5488655433134434410}
   enemyPrefab: {fileID: 1054505300255934258, guid: 533625576b2a87385b78fd5a4101ceee, type: 3}
-  spawnInterval: 10
+  spawnInterval: 5
 --- !u!4 &236584403
 Transform:
   m_ObjectHideFlags: 0
@@ -5873,7 +5873,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7019621337784666513, guid: 24393bdf8ae580a2cb52a68db9662356, type: 3}
       propertyPath: scene
-      value: Level_2
+      value: GameWin
       objectReference: {fileID: 0}
     - target: {fileID: 8035392708693644892, guid: 24393bdf8ae580a2cb52a68db9662356, type: 3}
       propertyPath: m_Name
