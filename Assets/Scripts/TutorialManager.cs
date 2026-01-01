@@ -13,9 +13,12 @@ public class TutorialManager : MonoBehaviour
     {
         conditions = new Func<bool>[]
         {
+            // Movement
             new Func<bool>(() => Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D)),
+            // Shooting
             new Func<bool>(() => Input.GetKeyDown(KeyCode.Space)),
             new Func<bool>(() => Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D)),
+            // Kill an enemy
             new Func<bool>(() => GameManager.Instance.EnemiesKilled >= 1),
         };
         StartCoroutine(RunTutorial());
@@ -29,6 +32,10 @@ public class TutorialManager : MonoBehaviour
 
     IEnumerator RunTutorial()
     {
+        for (int i = 0; i < popUps.Length; i++)
+        {
+            popUps[i].SetActive(false);
+        }
         yield return new WaitForSeconds(1f);
         for (int i = 0; i < popUps.Length; i++)
         {
@@ -43,14 +50,18 @@ public class TutorialManager : MonoBehaviour
             currentPopUpIndex = i;
             if (i < conditions.Length)
             {
-                yield return new WaitUntil(() => conditions[i]);
+                yield return new WaitUntil(() => conditions[i]());
             }
             else
             {
                 yield return new WaitForSeconds(3f);
             }
+            currentPopUpIndex++;
         }
-        popUps[currentPopUpIndex].SetActive(false);
+        for (int i = 0; i < popUps.Length; i++)
+        {
+            popUps[i].SetActive(false);
+        }
         Destroy(gameObject);
     }
 }
