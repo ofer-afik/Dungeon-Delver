@@ -5,8 +5,8 @@ using System.Linq;
 
 public class TutorialManager : MonoBehaviour
 {
-    public GameObject[] popUps;
-    private int currentPopUpIndex = 0;
+    public GameObject[] conditionalPopUps;
+    public GameObject[] nonConditionalPopUps;
     private Func<bool>[] conditions;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,38 +30,44 @@ public class TutorialManager : MonoBehaviour
         
     }
 
+    IEnumerator NonConditionalPopUps()
+    {
+        for (int i = 0; i < nonConditionalPopUps.Length; i++)
+        {
+            for (int j = 0; j < nonConditionalPopUps.Length; j++)
+            {
+                nonConditionalPopUps[j].SetActive(false);
+            }
+            nonConditionalPopUps[i].SetActive(true);
+            yield return new WaitForSeconds(2f);
+        }
+        for (int i = 0; i < nonConditionalPopUps.Length; i++)
+        {
+            nonConditionalPopUps[i].SetActive(false);
+        }
+        Destroy(this.gameObject);
+    }
+
     IEnumerator RunTutorial()
     {
-        for (int i = 0; i < popUps.Length; i++)
+        for (int i = 0; i < nonConditionalPopUps.Length; i++)
         {
-            popUps[i].SetActive(false);
+            nonConditionalPopUps[i].SetActive(false);
         }
-        yield return new WaitForSeconds(1f);
-        for (int i = 0; i < popUps.Length; i++)
+        for (int i = 0; i < conditionalPopUps.Length; i++)
         {
-            if (i == currentPopUpIndex)
-            {
-                popUps[i].SetActive(true);
-            }
-            else
-            {
-                popUps[i].SetActive(false);
-            }
-            currentPopUpIndex = i;
-            if (i < conditions.Length)
-            {
-                yield return new WaitUntil(() => conditions[i]());
-            }
-            else
-            {
-                yield return new WaitForSeconds(3f);
-            }
-            currentPopUpIndex++;
+            conditionalPopUps[i].SetActive(false);
         }
-        for (int i = 0; i < popUps.Length; i++)
+
+        for (int i = 0; i < conditionalPopUps.Length; i++)
         {
-            popUps[i].SetActive(false);
+            conditionalPopUps[i].SetActive(true);
+            // Wait until the condition is met
+            yield return new WaitUntil(conditions[i]);
+            conditionalPopUps[i].SetActive(false);
         }
-        Destroy(gameObject);
+        
+        // Start nonconditional popups
+        StartCoroutine(NonConditionalPopUps());
     }
 }
